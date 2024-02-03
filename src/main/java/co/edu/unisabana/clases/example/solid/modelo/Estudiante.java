@@ -14,4 +14,11 @@ public class Estudiante {
         System.out.println("Guardando estudiante en base de datos");
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
 }

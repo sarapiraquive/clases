@@ -2,6 +2,7 @@ package co.edu.unisabana.clases.example.solid.main;
 
 import co.edu.unisabana.clases.example.solid.modelo.Estudiante;
 import co.edu.unisabana.clases.example.solid.service.EnvioMaterial;
+import co.edu.unisabana.clases.example.solid.service.Materias;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,16 +17,11 @@ public class Main {
     }
 
     public static void verMateriasEstudiantes(Estudiante[] estudiantes) {
+        Materias materias = new Materias();
         for (Estudiante estudiante : estudiantes) {
-            if (estudiante.carrera.equals("Informatica")) {
-                System.out.println("Programacion, Arquitectura, Base de datos");
-            }
-            if (estudiante.carrera.equals("Administracion")) {
-                System.out.println("Negocios, Administracion I, Historia de la Administracion");
-            }
-            if (estudiante.carrera.equals("Industrial")) {
-                System.out.println("Procesos, Analitica de datos, Gestion de Calidad ");
+            System.out.println(estudiante.getNombre() + ":");
+            System.out.println(materias.obtenerMaterias(estudiante.getCarrera()));
+
             }
         }
     }
-}
