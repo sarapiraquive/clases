@@ -1,26 +1,26 @@
 package co.edu.unisabana.clases.example.solid.service;
 
-import co.edu.unisabana.clases.example.solid.modelo.Envio;
+
 import co.edu.unisabana.clases.example.solid.modelo.Estudiante;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class EnvioMaterial {
+  private final Map<String, MaterialInterface> estrategias = new HashMap<>();
+
+  public EnvioMaterial() {
+    estrategias.put("Informatica", new EnvioInformatica());
+    estrategias.put("Administracion", new EnvioAdmin());
+    estrategias.put("Administracion", new EnvioIndustrial());
+  }
 
   public void enviarMaterialEstudiante(Estudiante estudiante) {
-    if (estudiante.carrera.equals("Informatica")) {
-      Envio envio = new Envio();
-      envio.material = new ArrayList<>();
-      envio.material.add("Computador");
-      envio.material.add("Mouse");
-      envio.saludoDirector = "Jenny envia saludos";
-      EmailOutlook email = new EmailOutlook();
-      email.enviarEmail(envio);
-    }
-    if (estudiante.carrera.equals("Administracion")) {
-      //lo mismo de arriba pero con otra informacion
-    }
-    if (estudiante.carrera.equals("Industrial")) {
-      //
+    MaterialInterface estrategia = estrategias.get(estudiante.carrera);
+    if (estrategia != null) {
+      estrategia.enviarMaterial(estudiante);
+    } else {
+      throw new IllegalArgumentException("Carrera no soportada: " + estudiante.carrera);
     }
   }
 }
